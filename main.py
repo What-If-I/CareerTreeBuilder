@@ -41,9 +41,8 @@ def _print_slaves(slaves, nesting):
         nesting += -1
 
 # Парсим файл в список, где каждый работник представлен в виде [id, head_id, name]
-# Избавляемся от BOM в начале файла - \ufeff
 workers_parsed_data = [
-    line.strip('\ufeff').rstrip('\n').split('|') for line in open('1.txt', encoding='utf-8', mode='r')
+    text.rstrip('\n').split('|') for text in open('1.txt', encoding='utf-8-sig', mode='r')
     ]
 
 workers_by_id = {worker_id: Worker(worker_id, head_id, name) for worker_id, head_id, name in workers_parsed_data}
