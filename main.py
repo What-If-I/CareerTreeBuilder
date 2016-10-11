@@ -28,17 +28,17 @@ def get_root_and_connect_workers(workers: dict):
 def print_tree(root):
     print(root.name)
     if root.slaves is not None:
-        _print_slaves(slaves=root.slaves, nesting=0)
+        _print_slaves(slaves=root.slaves, nesting_counter=0)
 
 
-def _print_slaves(slaves, nesting):
+def _print_slaves(slaves, nesting_counter):
     if slaves is not None:
-        nesting += 1
+        nesting_counter += 1
         for slave in slaves:
-            print("{indent} {worker_name}".format(indent="---" * nesting, worker_name=slave.name))
-            _print_slaves(slave.slaves, nesting)
+            print("{indent} {worker_name}".format(indent="---" * nesting_counter, worker_name=slave.name))
+            _print_slaves(slave.slaves, nesting_counter)
     else:
-        nesting += -1
+        nesting_counter += -1
 
 # Парсим файл в список, где каждый работник представлен в виде [id, head_id, name]
 workers_parsed_data = [
